@@ -15,7 +15,6 @@ import {
   TrackChangesOutlined,
   Phone,
   Email,
-  LocationOn,
   LinkedIn,
   Instagram,
   ArrowOutward,
@@ -204,12 +203,6 @@ function Footer() {
               <Email />
               jaredbengtson@northboundstrategy.org
             </span>
-            <span>
-              <LocationOn />
-              1234 Summit Drive, Suite 500
-              <br />
-              Denver, CO 80202
-            </span>
           </div>
         </Container>
         <Container maxWidth="lg" className="copyright">
@@ -353,7 +346,13 @@ function About() {
       </section>
       <section className="founder">
         <Container maxWidth="lg">
-          <div className="portrait">JB</div>
+          <Image
+            src="/JaredProfile.jpeg"
+            alt="Jared Bengtson, founder of Northbound Strategy"
+            width={170}
+            height={190}
+            className="portrait"
+          />
           <div>
             <span className="eyebrow">Founder</span>
             <h2>Jared Bengtson</h2>
@@ -362,7 +361,15 @@ function About() {
               and enterprise transformation initiatives, Jared partners with
               executives to solve complex challenges and unlock growth.
             </p>
-            <Button variant="outlined">Connect on LinkedIn</Button>
+            <Button
+              component="a"
+              href="https://www.linkedin.com/in/jared-bengtson/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="outlined"
+            >
+              Connect on LinkedIn
+            </Button>
           </div>
         </Container>
       </section>
@@ -458,12 +465,6 @@ function Contact() {
             <p>
               <Email />
               jaredbengtson@northboundstrategy.org
-            </p>
-            <p>
-              <LocationOn />
-              1234 Summit Drive, Suite 500
-              <br />
-              Denver, CO 80202
             </p>
             <h3>Connect</h3>
             <LinkedIn />
