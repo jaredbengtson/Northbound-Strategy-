@@ -9,3 +9,5 @@ header{height:196px}.logo{width:480px;height:144px}@media(max-width:800px){heade
 
 .footerLogo{display:block;width:180px;height:auto;object-fit:contain;align-self:start}
 .founder .portrait{object-fit:cover;object-position:center;flex-shrink:0}
+.mobileMenuButton{display:none!important}
+@media(max-width:800px){header{position:relative;z-index:10}.mobileMenuButton{display:inline-flex!important;color:#38bbc4!important}.nav nav{display:none;position:absolute;top:100%;left:0;width:100%;padding:22px 24px 26px;background:#031728;box-shadow:0 8px 18px rgba(0,0,0,.25);flex-direction:column;align-items:stretch;gap:8px;z-index:20}.nav nav.open{display:flex}.nav nav>a{display:block;text-align:center;padding:12px}.nav nav>a.active{border-bottom:0;color:#38bbc4}.nav nav .MuiButton-root{margin-top:8px}}

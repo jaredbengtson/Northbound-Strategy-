@@ -1,7 +1,8 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Box, Button, Container, Grid, TextField } from "@mui/material";
+import { Box, Button, Container, Grid, IconButton, TextField } from "@mui/material";
 import {
   ExploreOutlined,
   GroupsOutlined,
@@ -18,6 +19,8 @@ import {
   LinkedIn,
   Instagram,
   ArrowOutward,
+  MenuOutlined,
+  CloseOutlined,
 } from "@mui/icons-material";
 
 const teal = "#2ca9b4";
@@ -46,6 +49,8 @@ const services = [
 ];
 const nav = ["Home", "About", "Services", "Approach", "Resources"];
 function Header({ page }: { page: string }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header>
       <Container maxWidth="lg" className="nav">
@@ -59,17 +64,32 @@ function Header({ page }: { page: string }) {
             priority
           />
         </Link>
-        <nav>
+        <IconButton
+          className="mobileMenuButton"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <CloseOutlined /> : <MenuOutlined />}
+        </IconButton>
+        <nav id="primary-navigation" className={menuOpen ? "open" : ""}>
           {nav.map((n) => (
             <Link
               className={page === n.toLowerCase() ? "active" : ""}
               href={n === "Home" ? "/" : `/${n.toLowerCase()}`}
               key={n}
+              onClick={() => setMenuOpen(false)}
             >
               {n}
             </Link>
           ))}
-          <Button component={Link} href="/contact" variant="outlined">
+          <Button
+            component={Link}
+            href="/contact"
+            variant="outlined"
+            onClick={() => setMenuOpen(false)}
+          >
             Contact
           </Button>
         </nav>
@@ -426,24 +446,50 @@ function Services() {
   );
 }
 function Contact() {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const firstName = data.get("firstName")?.toString() ?? "";
+    const lastName = data.get("lastName")?.toString() ?? "";
+    const workEmail = data.get("workEmail")?.toString() ?? "";
+    const company = data.get("company")?.toString() ?? "";
+    const message = data.get("message")?.toString() ?? "";
+    const body = [
+      `Name: ${firstName} ${lastName}`,
+      `Work Email: ${workEmail}`,
+      `Company: ${company}`,
+      "",
+      message,
+    ].join("\n");
+
+    window.location.href = `mailto:jaredbengtson@northboundstrategy.org?subject=${encodeURIComponent(
+      "Northbound Strategy website inquiry",
+    )}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <>
       <section className="contact">
         <Container maxWidth="lg">
-          <div>
+          <form onSubmit={handleSubmit}>
             <h2>Send us a message</h2>
             <Grid container spacing={2}>
               <Grid size={{ xs: 12, sm: 6 }}>
-                <TextField fullWidth label="First Name" />
+                <TextField fullWidth label="First Name" name="firstName" />
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
-                <TextField fullWidth label="Last Name" />
+                <TextField fullWidth label="Last Name" name="lastName" />
               </Grid>
               <Grid size={12}>
-                <TextField fullWidth label="Work Email" />
+                <TextField
+                  fullWidth
+                  label="Work Email"
+                  name="workEmail"
+                  type="email"
+                />
               </Grid>
               <Grid size={12}>
-                <TextField fullWidth label="Company" />
+                <TextField fullWidth label="Company" name="company" />
               </Grid>
               <Grid size={12}>
                 <TextField
@@ -451,11 +497,14 @@ function Contact() {
                   multiline
                   rows={4}
                   label="How can we help?"
+                  name="message"
                 />
               </Grid>
             </Grid>
-            <Button variant="contained">Send message</Button>
-          </div>
+            <Button type="submit" variant="contained">
+              Send message
+            </Button>
+          </form>
           <aside>
             <h3>Contact information</h3>
             <p>
