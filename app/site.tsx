@@ -206,7 +206,7 @@ function Footer() {
           </div>
         </Container>
         <Container maxWidth="lg" className="copyright">
-          © 2024 Northbound Strategy, LLC. All rights reserved.
+          © 2026 Northbound Strategy, LLC. All rights reserved.
         </Container>
       </footer>
     </>
