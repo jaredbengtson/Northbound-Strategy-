@@ -47,7 +47,7 @@ const services = [
     text: "Equip leaders with the insight and support to make better decisions and lead with confidence.",
   },
 ];
-const nav = ["Home", "About", "Services", "Approach", "Resources"];
+const nav = ["Home", "About", "Services", "Approach", "Thought Leadership"];
 function Header({ page }: { page: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -76,8 +76,14 @@ function Header({ page }: { page: string }) {
         <nav id="primary-navigation" className={menuOpen ? "open" : ""}>
           {nav.map((n) => (
             <Link
-              className={page === n.toLowerCase() ? "active" : ""}
-              href={n === "Home" ? "/" : `/${n.toLowerCase()}`}
+              className={
+                page === n.toLowerCase().replaceAll(" ", "-") ? "active" : ""
+              }
+              href={
+                n === "Home"
+                  ? "/"
+                  : `/${n.toLowerCase().replaceAll(" ", "-")}`
+              }
               key={n}
               onClick={() => setMenuOpen(false)}
             >
@@ -137,6 +143,17 @@ function Hero({ page }: { page: string }) {
     );
     sub =
       "We help organizations solve their toughest challenges and unlock new opportunities for growth.";
+  } else if (page === "thought-leadership") {
+    over = "Thought Leadership";
+    title = (
+      <>
+        Ideas for Clarity.
+        <br />
+        Insight for <em>Action.</em>
+      </>
+    );
+    sub =
+      "Practical perspectives for leaders navigating transformation, alignment, and sustainable growth.";
   } else {
     over = "Get in Touch";
     title = (
@@ -205,7 +222,7 @@ function Footer() {
             <b>Company</b>
             <Link href="/about">About</Link>
             <Link href="/approach">Approach</Link>
-            <Link href="/resources">Resources</Link>
+            <Link href="/thought-leadership">Thought Leadership</Link>
           </div>
           <div>
             <b>Services</b>
@@ -367,7 +384,7 @@ function About() {
       <section className="founder">
         <Container maxWidth="lg">
           <Image
-            src="/JaredProfile.jpeg"
+            src="/JaredProfile-gray.png"
             alt="Jared Bengtson, founder of Northbound Strategy"
             width={170}
             height={190}
@@ -443,6 +460,83 @@ function Services() {
         ))}
       </Container>
     </section>
+  );
+}
+function ThoughtLeadership() {
+  const insights = [
+    {
+      category: "Strategic Planning",
+      title: "Strategy That Moves Beyond the Slide Deck",
+      excerpt:
+        "How leaders can turn strategic ambition into a focused roadmap, clear choices, and measurable progress.",
+      icon: <ExploreOutlined />,
+    },
+    {
+      category: "Organizational Alignment",
+      title: "Alignment Is a Leadership Discipline",
+      excerpt:
+        "Why shared priorities, decision rights, and accountability matter more than another layer of process.",
+      icon: <GroupsOutlined />,
+    },
+    {
+      category: "Transformation",
+      title: "Building Momentum Through Meaningful Change",
+      excerpt:
+        "A practical perspective on sequencing transformation so teams can absorb change and sustain results.",
+      icon: <TrendingUpOutlined />,
+    },
+  ];
+
+  return (
+    <>
+      <section className="thoughtIntro">
+        <Container maxWidth="lg">
+          <span className="eyebrow">Featured perspective</span>
+          <div className="featuredInsight">
+            <div className="featuredMark">
+              <LightbulbOutlined />
+            </div>
+            <div>
+              <span>Leadership &amp; Transformation</span>
+              <h2>Leading Through Complexity Without Losing Direction</h2>
+              <p>
+                Complexity does not call for more activity. It calls for a
+                clearer point of view, disciplined choices, and an operating
+                rhythm that keeps people moving toward the same outcome.
+              </p>
+              <Button component={Link} href="/contact" endIcon={<ArrowOutward />}>
+                Start a conversation
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+      <section className="insights">
+        <Container maxWidth="lg">
+          <div className="sectionHeading">
+            <div>
+              <span className="eyebrow">Perspectives</span>
+              <h2>Ideas to Help Leaders Move Forward</h2>
+            </div>
+            <p>
+              Explore practical thinking on strategy, organizational
+              alignment, performance, and leadership.
+            </p>
+          </div>
+          <div className="insightGrid">
+            {insights.map((insight) => (
+              <article className="insightCard" key={insight.title}>
+                <div className="insightIcon">{insight.icon}</div>
+                <span>{insight.category}</span>
+                <h3>{insight.title}</h3>
+                <p>{insight.excerpt}</p>
+                <small>More insights coming soon</small>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }
 function Contact() {
@@ -532,6 +626,8 @@ export function Site({ page }: { page: string }) {
       <About />
     ) : page === "services" ? (
       <Services />
+    ) : page === "thought-leadership" ? (
+      <ThoughtLeadership />
     ) : page === "contact" ? (
       <Contact />
     ) : (
