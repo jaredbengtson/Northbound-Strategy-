@@ -467,11 +467,14 @@ function Services() {
                 support sustainable growth.
               </p>
             </div>
-            <ul>
-              {s.bullets.map((x) => (
-                <li key={x}>{x}</li>
-              ))}
-            </ul>
+            <div className="serviceOutcomes">
+              <h3>Outcomes</h3>
+              <ul>
+                {s.bullets.map((x) => (
+                  <li key={x}>{x}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         ))}
       </Container>
