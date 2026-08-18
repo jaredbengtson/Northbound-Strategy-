@@ -30,21 +30,41 @@ const services = [
     icon: <ExploreOutlined />,
     title: "Strategic Planning",
     text: "We work with you to clarify goals, assess opportunities, and define a roadmap for success.",
+    bullets: [
+      "Executive Vision & Strategic Direction",
+      "Cross-Functional Priority Alignment",
+      "Enterprise Roadmaps & Investment Choices",
+    ],
   },
   {
     icon: <GroupsOutlined />,
     title: "Organizational Alignment",
     text: "Aligning teams, systems, and resources to ensure everyone is moving in the same direction.",
+    bullets: [
+      "Operating Model & Decision Rights",
+      "Roles, Governance & Accountability",
+      "Team Alignment & Ways of Working",
+    ],
   },
   {
     icon: <TrendingUpOutlined />,
     title: "Performance Optimization",
     text: "Improve efficiency, drive accountability, and build measurable momentum across your organization.",
+    bullets: [
+      "Performance Measures & Executive Dashboards",
+      "Process, Workflow & Resource Optimization",
+      "Continuous Improvement & Value Realization",
+    ],
   },
   {
     icon: <FlagOutlined />,
     title: "Leadership Advisory",
     text: "Equip leaders with the insight and support to make better decisions and lead with confidence.",
+    bullets: [
+      "Executive Decision Support",
+      "Leadership Alignment & Team Effectiveness",
+      "Transformation & Change Leadership",
+    ],
   },
 ];
 const nav = ["Home", "About", "Services", "Approach", "Thought Leadership"];
@@ -448,11 +468,7 @@ function Services() {
               </p>
             </div>
             <ul>
-              {[
-                "Strategy & Roadmaps",
-                "Team Alignment",
-                "Measurable Outcomes",
-              ].map((x) => (
+              {s.bullets.map((x) => (
                 <li key={x}>{x}</li>
               ))}
             </ul>
